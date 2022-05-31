@@ -13,14 +13,26 @@
     </style>
 
     <script>
-        let playerSelection = prompt("Rock, paper, or scissors?").toLowerCase()
-
-        const computerPlay = (playerSelection, computerSelection) => {
+        const computerPlay = () => {
             let options = ["rock", "paper", "scissors"]
             return options[Math.floor(Math.random() * 3)];
         }
 
-        
+        const play = (playerSelection, computerSelection) => {
+            let determineWinState = {
+                "rock": {"rock": "tie", "paper": "lose", "scissors": "win"},
+                "paper": {"rock": "win", "paper": "tie", "scissors": "lose"},
+                "scissors": {"rock": "lose", "paper": "win", "scissors": "tie"}
+            }
+
+            let determine = determineWinState[playerSelection][computerSelection]
+            return `You ${determine}! ${playerSelection} ${determine}s against ${computerSelection}`
+        }
+
+        let playerSelection = prompt("Rock, paper, or scissors?").toLowerCase()
+        let computerSelection = computerPlay()
+
+        console.log(play(playerSelection, computerSelection))
     </script>
 
 </head>
