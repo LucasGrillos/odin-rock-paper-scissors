@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            background-color: black;
+        }
+    </style>
+
+    <script>
+        let playerSelection = prompt("Rock, paper, or scissors?").toLowerCase()
+
+        const computerPlay = (playerSelection, computerSelection) => {
+            let options = ["rock", "paper", "scissors"]
+            return options[Math.floor(Math.random() * 3)];
+        }
+
+        
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>
+
+<!--
+    Rock-Paper-Scissors game
+    1) take player input
+        -convert player input to lowercase, and test if
+        it's a valid input
+        -generate random number 1-3, use it to match a 
+        dictionary to 
+    2) generate random opponent input
+    3) compare player input to opponent input
+    4) return string describing win and win method
+-->
