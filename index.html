@@ -6,50 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <style>
-        body {
-            background-color: black;
-        }
-    </style>
-
-    <script>
-        const computerPlay = () => {
-            let options = ["rock", "paper", "scissors"]
-            return options[Math.floor(Math.random() * 3)];
-        }
-
-        const playRound = (playerSelection, computerSelection) => {
-            let determineWinState = {
-                "rock": {"rock": "tie", "paper": "lose", "scissors": "win"},
-                "paper": {"rock": "win", "paper": "tie", "scissors": "lose"},
-                "scissors": {"rock": "lose", "paper": "win", "scissors": "tie"}
-            }
-
-            let determine = determineWinState[playerSelection][computerSelection]
-            console.log(`You ${determine}! ${playerSelection} ${determine}s against ${computerSelection}`)
-            return determine
-        }
-
-        let playerWins = 0
-        let computerWins = 0
-
-        for (let i=0; i<5; i++) {
-            let playerSelection = prompt("Rock, paper, or scissors?").toLowerCase()
-            let computerSelection = computerPlay()
-            let checkWin = playRound(playerSelection, computerSelection)
-            checkWin == "tie" ? null : (checkWin == "win" ? playerWins++ : computerWins++) 
-        }
-
-        console.log(playerWins==computerWins 
-            ? `You tie ${playerWins} games to ${computerWins}`
-            : (playerWins > computerWins 
-            ? `You win ${playerWins} games to ${computerWins}`
-            : `You lose ${playerWins} games to ${computerWins}`))
-    </script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
 
 </head>
 <body>
-    
+    <button class="game-button" data-symbol="rock">✊</button>
+    <button class="game-button" data-symbol="paper">✋</button>
+    <button class="game-button" data-symbol="scissors">✌️</button>
 </body>
 </html>
 
