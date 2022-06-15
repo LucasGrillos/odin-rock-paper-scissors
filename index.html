@@ -11,20 +11,33 @@
 
 </head>
 <body>
-    <button class="game-button" data-symbol="rock">✊</button>
-    <button class="game-button" data-symbol="paper">✋</button>
-    <button class="game-button" data-symbol="scissors">✌️</button>
+    <header>
+        <ul>
+            <li>PLAYER SCORE: 0</li>
+            <li>COMPUTER SCORE: 0</li>
+        </ul>
+    </header>
+    <div class="game-content message">
+        <button class="game-button" data-symbol="rock">✊</button>
+        <button class="game-button" data-symbol="paper">✋</button>
+        <button class="game-button" data-symbol="scissors">✌️</button>
+        <h2 class="win-message">YOU WIN</h2>
+        <h2 class="win-message" id="desc-message">PAPER BEATS ROCK</h2>
+    </div>
 </body>
 </html>
 
 <!--
-    Rock-Paper-Scissors game
-    1) take player input
-        -convert player input to lowercase, and test if
-        it's a valid input
-        -generate random number 1-3, use it to match a 
-        dictionary to 
-    2) generate random opponent input
-    3) compare player input to opponent input
-    4) return string describing win and win method
+    - Make rock-paper-scissors buttons using hand emojis
+        * buttons enlarge on hover
+        * when clicked, they disapper to play the game animation
+    - Make header with player and computer scores in the top left and top right respectively
+        * update header score after each game
+    - Make message listing who won after game play
+        * have players click button to play next game
+        * make disappear when next game starts
+    - Have ending message which displays 
+        * display total score
+        * display who won
+        * button to restart game
 -->
