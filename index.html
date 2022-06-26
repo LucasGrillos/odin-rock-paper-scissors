@@ -7,8 +7,6 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
-
 </head>
 <body>
     <header>
@@ -18,13 +16,52 @@
         </ul>
     </header>
     <div class="game-content message">
-        <button class="game-button" data-symbol="rock">✊</button>
-        <button class="game-button" data-symbol="paper">✋</button>
-        <button class="game-button" data-symbol="scissors">✌️</button>
+        <!--
+            GAME START BUTTON
+        -->
+        <button id="gamestart-button">
+            PLAY
+        </button>
+        
+        <!--
+            ROCK-PAPER-SCISSORS SELECT ELEMENTS
+        -->
+        <button class="rps-select-button" data-symbol="rock">✊</button>
+        <button class="rps-select-button" data-symbol="paper">✋</button>
+        <button class="rps-select-button" data-symbol="scissors">✌️</button>
+
+        <!--
+            ROCK-PAPER-SCISSORS WIN MESSAGE
+        -->
         <h2 class="win-message">YOU WIN</h2>
         <h2 class="win-message" id="desc-message">PAPER BEATS ROCK</h2>
     </div>
+
+    <!--
+        GAME ANIMATION
+    -->
+
+    <div class="game-hand player-rps">
+        ✌️
+        <!--
+            <div class="player-rps">
+                ✌️
+            </div>
+        -->
+    </div>
+
+
+    <div class="game-hand computer-rps">
+        ✊
+        <!--
+            <div class="computer-rps">
+                ✊
+            </div>
+        -->
+    </div>
+    <script src="script.js" defer></script>
 </body>
+
 </html>
 
 <!--
