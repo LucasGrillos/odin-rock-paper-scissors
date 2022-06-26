@@ -4,6 +4,9 @@ let gameContent = document.querySelector(".game-content");
 let playerHand = document.querySelector('.player-rps');
 let computerHand = document.querySelector('.computer-rps');
 
+let winH2 = document.querySelector('#win-msg');
+let describeH2 = document.querySelector('#desc-message');
+
 let textToEmoji = {
     'rock': '✊',
     'paper': '✋',
@@ -14,13 +17,14 @@ let emojiToText = {
     '✊': 'rock',
     '✋': 'paper',
     '✌️': 'scissors'
-}
+};
 
 window.addEventListener('load', function() {
     startGameButton.addEventListener('click', startGame);
 }, false);
 
 const startGame = () => {
+    
     startGameButton.removeEventListener('click', startGame);
     startGameButton.style.display = "none";
     gameContent.classList.toggle("message");
@@ -42,20 +46,36 @@ const playDropAnimation = (event) => {
     computerHand.textContent = textToEmoji[computerPlay()];
     playerHand.style.animation = "hand-animation .3s";
     computerHand.style.animation = "hand-animation .3s";
-    playerHand.addEventListener('animationend', playShakeAnimation);
+    playerHand.addEventListener('animationend', playRound);
     //console.log(event.target.dataset.symbol);
 }
 
-playRound = (event) => {
+const playRound = (event) => {
     let determineWinState = {
         "rock": {"rock": "tie", "paper": "lose", "scissors": "win"},
         "paper": {"rock": "win", "paper": "tie", "scissors": "lose"},
         "scissors": {"rock": "lose", "paper": "win", "scissors": "tie"}
     }
-
+    
     let playerSelection = emojiToText[playerHand.textContent];
     let computerSelection = emojiToText[computerHand.textContent];
     let determine = determineWinState[playerSelection][computerSelection]
+
+    console.log(playerSelection)
+
+    gameContent.classList.toggle("message");
+
+    winH2.textContent = `You ${determine}!`
+    describeH2.textContent = `${playerSelection} ${determine}s against ${computerSelection}`
+    winH2.style.display = 'block';
+    describeH2.style.display = 'block';
+    incrementPlayerScore();
+}
+
+const incrementPlayerScore = () => {
+    let playerScore = parseInt(document.querySelector('#player-score').textContent);
+    playerScore++;
+    document.querySelector('#player-score').textContent = playerScore;
 }
 
 const computerPlay = () => {
