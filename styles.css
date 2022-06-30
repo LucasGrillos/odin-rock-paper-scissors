@@ -83,6 +83,11 @@ header li {
     color: darkgray;
 }
 
+#click-message {
+    font-size: 32px;
+    color: darkgray;
+}
+
 #gamestart-button {
     background-color: #3D9970;
     font-size: 3em;
