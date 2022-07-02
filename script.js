@@ -28,14 +28,19 @@ window.addEventListener('load', function() {
     addStartGameButton()
 }, false);
 
-const addStartGameButton = () => {
+
+const hideMessageElements = () => {
     winH2.style.display = "none";
     describeH2.style.display = "none";
     clickH2.style.display = "none";
     playerHand.style.display = "none";
     computerHand.style.display = "none";
-    playerScore.textContent = "0";
-    computerScore.textContent = "0";
+}
+
+
+const addStartGameButton = () => {
+    hideMessageElements();
+    resetScores();
     body.removeEventListener('click', addStartGameButton);
     
     startGameButton.style.display = "block";
@@ -49,11 +54,7 @@ const startGame = () => {
 }
 
 const repeatGame = () => {
-    winH2.style.display = "none";
-    describeH2.style.display = "none";
-    clickH2.style.display = "none";
-    playerHand.style.display = "none";
-    computerHand.style.display = "none";
+    hideMessageElements();
     body.removeEventListener('click', repeatGame);
     addGameButtons();
 }
@@ -76,7 +77,7 @@ const playDropAnimation = (event) => {
     playerHand.style.display = "block";
     computerHand.style.display = "block";
     playerHand.textContent = textToEmoji[event.target.dataset.symbol];
-    computerHand.textContent = textToEmoji[computerPlay()];
+    computerHand.textContent = textToEmoji[computerHandSelection()];
     playerHand.style.animation = "hand-animation .3s";
     computerHand.style.animation = "hand-animation .3s";
     playerHand.addEventListener('animationend', playRound);
@@ -96,21 +97,14 @@ const playRound = (event) => {
 
     gameContent.classList.toggle("message");
 
-    winH2.textContent = `You ${results}!`
-    describeH2.textContent = `${playerSelection} ${results}s against ${computerSelection}`
-    winH2.style.display = 'block';
-    describeH2.style.display = 'block';
-    clickH2.style.display = 'block';
-
     checkTie(results);
 }
 
-//toggleScores()
-
 const checkTie = (results) => {
     const TIE = 'tie';
-    results == TIE ? clickAnywhereToContinue() : checkWin(results);
+    results == TIE ? continueGame(results) : checkWin(results);
 }
+
 
 const checkWin = (results) => {
     const WIN = 'win';
@@ -120,13 +114,36 @@ const checkWin = (results) => {
         gameOver(winOrLose)
     } 
     else {
-        clickAnywhereToContinue('repeat');   
+        continueGame(results);   
     } 
 }
 
-const clickAnywhereToContinue = (restartOrRepeat) => {
-    restartOrRepeat == 'restart' ? body.addEventListener('click', addStartGameButton) : body.addEventListener('click', repeatGame);
+const continueGame = (results) => {
+    let playerSelection = emojiToText[playerHand.textContent];
+    let computerSelection = emojiToText[computerHand.textContent];
+
+    console.log("continueGame")
+    winH2.textContent = `You ${results}!`
+    describeH2.textContent = `${playerSelection} ${results}s against ${computerSelection}`
+    displayMessageElements()
+    body.addEventListener('click', repeatGame)
+
 }
+
+const gameOver = (winOrLose) => {
+    winH2.textContent = `YOU ${winOrLose.toUpperCase()}!`
+    describeH2.textContent = `${parseInt(playerScore.textContent)} games to ${parseInt(computerScore.textContent)} games`
+    clickH2.textContent = '';
+    displayMessageElements()
+    body.addEventListener('click', addStartGameButton)
+}
+
+const displayMessageElements = () => {
+    winH2.style.display = 'block';
+    describeH2.style.display = 'block';
+    clickH2.style.display = 'block';
+}
+
 
 const incrementPlayerScore = () => {
     let score = parseInt(playerScore.textContent);
@@ -140,13 +157,12 @@ const incrementComputerScore = () => {
     computerScore.textContent = score; 
 }
 
-const computerPlay = () => {
-    let options = ["rock", "paper", "scissors"]
-    return options[Math.floor(Math.random() * 3)];
+const resetScores = () => {
+    playerScore.textContent = "0";
+    computerScore.textContent = "0";
 }
 
-const gameOver = (winOrLose) => {
-    winH2.textContent = `YOU ${winOrLose}!`
-    describeH2.textContent = `${parseInt(playerScore.textContent)} games to ${parseInt(computerScore.textContent)} games`
-    clickAnywhereToContinue('restart')
+const computerHandSelection = () => {
+    let options = ["rock", "paper", "scissors"]
+    return options[Math.floor(Math.random() * 3)];
 }
