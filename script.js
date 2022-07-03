@@ -80,17 +80,17 @@ const playDropAnimation = (event) => {
     computerHand.textContent = textToEmoji[computerHandSelection()];
     playerHand.style.animation = "hand-animation .3s";
     computerHand.style.animation = "hand-animation .3s";
-    playerHand.addEventListener('animationend', playRound);
+    playerHand.addEventListener('animationend', evaluateRound);
     //console.log(event.target.dataset.symbol);
 }
 
-const playRound = (event) => {
+const evaluateRound = (event) => {
     let determineWinState = {
         "rock": {"rock": "tie", "paper": "lose", "scissors": "win"},
         "paper": {"rock": "win", "paper": "tie", "scissors": "lose"},
         "scissors": {"rock": "lose", "paper": "win", "scissors": "tie"}
     }
-    playerHand.removeEventListener('animationend', playRound);
+    playerHand.removeEventListener('animationend', evaluateRound);
     let playerSelection = emojiToText[playerHand.textContent];
     let computerSelection = emojiToText[computerHand.textContent];
     let results = determineWinState[playerSelection][computerSelection]
