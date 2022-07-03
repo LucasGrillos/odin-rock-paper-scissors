@@ -1,2 +1,2 @@
-# odin-calculator
-javascript odin calculator project
+# odin-rock-paper-scissors
+javascript odin rock-paper-scissors project
